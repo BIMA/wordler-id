@@ -29,14 +29,14 @@ export default class Square extends React.Component {
                         if (fieldIndex === indexWords) {
                             this.changeColor("green", fieldIndex)
                         } else {
-                            this.changeColor("gray", fieldIndex)
+                            this.changeColor("yellow", fieldIndex)
                         }
                     } else {
                         this.setState(fieldIndex - 5)
                         if (fieldIndex === indexWords) {
                             this.changeColor("green", fieldIndex)
                         } else {
-                            this.changeColor("gray", fieldIndex)
+                            this.changeColor("yellow", fieldIndex)
                         }
                     }
                 } else {
