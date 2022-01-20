@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# WORDLE ID
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was inspired by [Wordle Game](https://www.powerlanguage.co.uk/wordle/)
 
 ## Available Scripts
 
