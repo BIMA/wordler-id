@@ -11,7 +11,7 @@ export class Game extends React.Component {
             }],
             stepNumber: 0,
             position: 0,
-            words: ["R", "U", "S", "A", "K"],
+            words: process.env.REACT_APP_WORDS,
             rightWords: Array(5).fill(false),
         }
     }
