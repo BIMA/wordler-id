@@ -12,6 +12,7 @@ export class Game extends React.Component {
             stepNumber: 0,
             position: 0,
             words: ["R", "U", "S", "A", "K"],
+            rightWords: Array(5).fill(false),
         }
     }
 
@@ -24,26 +25,35 @@ export class Game extends React.Component {
         const value = e.target.value.toUpperCase();
         const history = this.state.history.slice(0, this.state.stepNumber + 1)
         const current = history[history.length - 1];
+
+        const chars = this.state.rightWords.slice();
+
         const squares = current.squares.slice();
         const nextStepNumber = this.state.stepNumber + 1;
         const nextField = document.querySelector(
             `input[name='${this.state.stepNumber + 1}']`
         )
+
         if (this.state.words.includes(value)) {
             console.log("----------")
             console.log("step: ", this.state.stepNumber)
             console.log("position: ", this.state.position)
             console.log("input: ", value)
-            console.log("index: ", this.state.words.indexOf(value))
-            if (this.state.words.indexOf(value) === this.state.position) {
+            console.log("index: ", this.state.words.indexOf(value, this.state.position))
+            console.log("right-words: ", chars)
+            if (this.state.words.indexOf(value, this.state.position) === this.state.position) {
                 this.changeColor("green", this.state.stepNumber)
-            } else if (this.state.words.indexOf(value) !== -1 ) {
+                chars[this.state.position] = true
+            } else if (this.state.words.indexOf(value, this.state.position) !== -1 ) {
                 this.changeColor("yellow", this.state.stepNumber)
+                chars[this.state.position] = false
             } else {
                 this.changeColor("gray", this.state.stepNumber)
+                chars[this.state.position] = false
             }
         } else {
             this.changeColor("gray", this.state.stepNumber)
+            chars[this.state.position] = false
         }
         squares[i] = value;
         this.setState({
@@ -52,8 +62,12 @@ export class Game extends React.Component {
                 squares: squares,
             }]),
             stepNumber: nextStepNumber,
-            position: nextStepNumber < 5 ? this.state.position + 1 : nextStepNumber % 5
+            position: nextStepNumber < 5 ? this.state.position + 1 : nextStepNumber % 5,
+            rightWords: chars,
         })
+        if (chars.every(v => v === true)) {
+            return;
+        }
         if (nextField !== null) {
             nextField.focus()
         }
